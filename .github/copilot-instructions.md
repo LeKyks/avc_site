@@ -2,44 +2,33 @@
 
 ## Vue d'ensemble du projet
 
-Application web full-stack minimaliste pour gérer une liste de courses pour raclette. Design chaleureux et élégant, déployée gratuitement sur GitHub Pages.
+Application web frontend minimaliste pour gérer une liste de courses pour raclette. Design chaleureux et élégant, déployée sur GitHub Pages avec stockage localStorage.
 
 ## Stack Technique
 
 ### Frontend
-- **Vanilla JavaScript** (ES6+) - Pas de React/Vue/Angular
-- **Tailwind CSS** - Via CDN, palette de couleurs chaudes obligatoire
+- **Vanilla JavaScript** (ES6+) - Pas de frameworks lourds
+- **Tailwind CSS** - Via CDN, palette de couleurs chaudes
 - **Vite** - Build tool pour optimisation
 - **Google Fonts** - Comfortaa (titres) + Nunito (corps)
-
-### Backend  
-- **Node.js 18+** avec Express.js
-- **JSON File Database** - `backend/data/items.json`
-- **CORS** activé pour compatibilité GitHub Pages
+- **localStorage** - Persistance des données côté client
 
 ## Structure du Projet
 
 ```
 📁 .github/
-├── workflows/deploy.yml           # CI/CD automatique
+├── workflows/deploy.yml           # CI/CD automatique GitHub Actions
 ├── copilot-instructions.md        # Ce fichier
 └── instructions/
-    ├── frontend.instructions.md    # Instructions frontend
-    └── backend.instructions.md     # Instructions backend
+    └── frontend.instructions.md   # Instructions frontend détaillées
 
 📁 frontend/
 ├── src/
-│   ├── index.html
-│   ├── styles/main.css
-│   └── scripts/app.js
+│   ├── index.html                 # Page principale
+│   ├── styles/main.css            # Styles personnalisés
+│   └── scripts/app.js             # Logique application + localStorage
 ├── package.json
 └── vite.config.js
-
-📁 backend/
-├── server.js
-├── routes/items.js
-├── data/items.json
-└── package.json
 ```
 
 ## Règles Globales de Code
@@ -57,112 +46,79 @@ Application web full-stack minimaliste pour gérer une liste de courses pour rac
 - Corps: `Nunito` (Google Fonts)
 - Design épuré, minimaliste, professionnel mais chaleureux
 
-### API REST Format
+### Gestion des Données
 
-Toutes les routes suivent ce format strict:
+L'application utilise **localStorage** pour persister les données :
 
 ```javascript
-// GET /api/items
-{ items: [{id, name, quantity}] }
-
-// POST /api/items (body: {name, quantity})
-{ item: {id, name, quantity} }
-
-// DELETE /api/items/:id
-{ success: true }
+// Structure des données
+{
+  items: [
+    { id: 1, name: "Fromage à raclette", quantity: "1kg" }
+  ],
+  nextId: 2
+}
 ```
+
+- Clé localStorage : `raclette-items`
+- Auto-incrémentation des IDs
+- Validation : `name` requis, `quantity` optionnelle
+- Sauvegarde automatique après chaque modification
 
 ## Commandes de Build
 
-### Frontend
 ```bash
 cd frontend
 npm install
-npm run dev      # Dev server (Vite)
-npm run build    # Production build
-```
-
-### Backend  
-```bash
-cd backend
-npm install
-npm start        # Serveur sur http://localhost:3000
-npm run dev      # Mode watch (--watch flag)
+npm run dev      # Dev server (Vite) sur http://localhost:5173
+npm run build    # Production build dans dist/
 ```
 
 ## Déploiement
 
 ### GitHub Actions Automatique
 - **Trigger**: Push sur branche `main`
-- **Process**: Build frontend → Deploy sur `gh-pages`
-- **Configuration**: Déjà configurée dans `.github/workflows/deploy.yml`
-
-### GitHub Pages
-- URL: `https://<username>.github.io/<repo-name>/`
-- Source: Branche `gh-pages` / root
-- Configuration automatique via workflow
+- **Process**: Build frontend → Deploy sur GitHub Pages
+- **URL**: https://lekyks.github.io/avc_site/
 
 ## Standards de Code
 
 ### JavaScript
 - ES6+ obligatoire (async/await, destructuring, arrow functions)
 - camelCase pour variables/fonctions
-- Gestion d'erreurs avec try/catch systématique
 - Pas de `var`, utiliser `const` et `let`
+- Commentaires JSDoc pour les fonctions principales
 
 ### HTML/CSS
 - Sémantique HTML5 stricte
-- Tailwind CSS uniquement (pas de CSS-in-JS)
+- Tailwind CSS uniquement
 - Mobile-first responsive
-- Accessibilité WCAG AA minimum (aria-labels, rôles)
-
-### Backend Express
-- Routes modulaires dans `routes/`
-- Middleware: express.json(), cors()
-- Validation des inputs obligatoire
-- HTTP status codes appropriés (200, 201, 400, 404, 500)
-
-## Gestion de la Base de Données JSON
-
-Structure du fichier `backend/data/items.json`:
-```json
-{
-  "items": [
-    {"id": 1, "name": "Fromage à raclette", "quantity": "1kg"}
-  ],
-  "nextId": 2
-}
-```
-
-- Auto-incrémentation des IDs
-- Lecture/écriture synchrone (fs.readFileSync/writeFileSync)
-- Validation: `name` requis, `quantity` optionnelle
+- Accessibilité WCAG AA (aria-labels, rôles, contraste)
 
 ## Ce que Copilot DOIT Suggérer
 - Code simple, lisible, maintenable
 - Patterns JavaScript modernes
 - Améliorations UX intuitives
-- Optimisations de performance justifiées
+- Optimisations localStorage (debouncing, compression)
 - Accessibilité améliorée
 
 ## Ce que Copilot NE DOIT PAS Faire
 - Proposer React/Vue/Angular ou frameworks lourds
 - Utiliser des couleurs froides (bleu, vert, violet)
-- Sur-architecturer (microservices, DDD, patterns complexes)
-- Ignorer les contraintes de déploiement gratuit GitHub Pages
+- Sur-architecturer (pas besoin de Redux, MobX, etc.)
 - Ajouter TypeScript sans justification
-- Proposer SQLite ou autres DB lourdes
+- Proposer des bases de données externes (Firebase, etc.) sauf si demandé
 
 ## Points d'Évolution Possibles
-- Migration vers Firebase/Supabase pour persistance cloud
-- PWA avec Service Workers pour mode offline
-- Tests automatisés (Vitest frontend, Jest backend)
-- WebSockets pour sync real-time multi-utilisateurs
-- Authentication basique (JWT)
+- Export/Import des listes (JSON, CSV)
+- PWA avec Service Workers
+- Partage de listes via URL
+- Thèmes de couleurs personnalisables
+- Mode sombre (avec palette chaude adaptée)
 
 ## Philosophie du Projet
 
-> "Code élégant, simple et fonctionnel. Un site inutile mais magnifiquement réalisé."
+> "Code élégant, simple et fonctionnel. Une application minimaliste mais magnifiquement réalisée."
 
 Privilégie toujours :
 1. **Simplicité** avant complexité

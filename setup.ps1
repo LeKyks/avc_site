@@ -1,5 +1,6 @@
 # Script d'initialisation du projet Liste de Courses Raclette
 # Usage: .\setup.ps1
+# Note: Cette application utilise uniquement localStorage (pas de backend)
 
 Write-Host ""
 Write-Host "=============================================" -ForegroundColor Magenta
@@ -28,33 +29,6 @@ $npmVersion = npm --version
 Write-Host "npm trouve: v$npmVersion" -ForegroundColor Green
 Write-Host ""
 
-# Installation Backend
-Write-Host "=============================================" -ForegroundColor Magenta
-Write-Host "  INSTALLATION BACKEND" -ForegroundColor Magenta
-Write-Host "=============================================" -ForegroundColor Magenta
-Write-Host ""
-
-if (Test-Path "backend") {
-    Set-Location backend
-    
-    Write-Host "Installation des dependances backend..." -ForegroundColor Cyan
-    npm install
-    
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "Backend installe avec succes!" -ForegroundColor Green
-    } else {
-        Write-Host "ERREUR lors de l'installation du backend" -ForegroundColor Red
-        Set-Location ..
-        exit 1
-    }
-    
-    Set-Location ..
-} else {
-    Write-Host "ATTENTION: Dossier backend introuvable" -ForegroundColor Yellow
-}
-
-Write-Host ""
-
 # Installation Frontend
 Write-Host "=============================================" -ForegroundColor Magenta
 Write-Host "  INSTALLATION FRONTEND" -ForegroundColor Magenta
@@ -77,38 +51,29 @@ if (Test-Path "frontend") {
     
     Set-Location ..
 } else {
-    Write-Host "ATTENTION: Dossier frontend introuvable" -ForegroundColor Yellow
+    Write-Host "ERREUR: Dossier frontend introuvable" -ForegroundColor Red
+    exit 1
 }
 
 Write-Host ""
 
-# Demarrage des serveurs
+# Demarrage du serveur de developpement
 Write-Host "=============================================" -ForegroundColor Magenta
-Write-Host "  DEMARRAGE DES SERVEURS" -ForegroundColor Magenta
+Write-Host "  DEMARRAGE DU SERVEUR" -ForegroundColor Magenta
 Write-Host "=============================================" -ForegroundColor Magenta
 Write-Host ""
 
 Write-Host "Instructions:" -ForegroundColor Cyan
-Write-Host "   - Backend: http://localhost:3000" -ForegroundColor White
 Write-Host "   - Frontend: http://localhost:5173" -ForegroundColor White
-Write-Host "   - Appuyez sur CTRL+C dans chaque terminal pour arreter" -ForegroundColor Yellow
+Write-Host "   - Les donnees sont stockees dans localStorage (navigateur)" -ForegroundColor White
+Write-Host "   - Appuyez sur CTRL+C dans le terminal pour arreter" -ForegroundColor Yellow
 Write-Host ""
 
-# Demarrage backend
-if (Test-Path "backend") {
-    Write-Host "Demarrage du backend dans un nouveau terminal..." -ForegroundColor Cyan
-    $backendPath = Resolve-Path "backend"
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$backendPath'; Write-Host 'Backend API' -ForegroundColor Green; npm start"
-    Start-Sleep -Seconds 2
-}
-
 # Demarrage frontend
-if (Test-Path "frontend") {
-    Write-Host "Demarrage du frontend dans un nouveau terminal..." -ForegroundColor Cyan
-    $frontendPath = Resolve-Path "frontend"
-    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$frontendPath'; Write-Host 'Frontend Vite' -ForegroundColor Green; npm run dev"
-    Start-Sleep -Seconds 2
-}
+Write-Host "Demarrage du serveur de developpement..." -ForegroundColor Cyan
+$frontendPath = Resolve-Path "frontend"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$frontendPath'; Write-Host 'Frontend Vite - localStorage Mode' -ForegroundColor Green; npm run dev"
+Start-Sleep -Seconds 2
 
 # Message final
 Write-Host ""
@@ -116,16 +81,17 @@ Write-Host "=============================================" -ForegroundColor Gree
 Write-Host "  PROJET INITIALISE AVEC SUCCES!" -ForegroundColor Green
 Write-Host "=============================================" -ForegroundColor Green
 Write-Host ""
-Write-Host "Le projet est pret!" -ForegroundColor Green
+Write-Host "Le serveur de developpement demarre..." -ForegroundColor Green
 Write-Host ""
 Write-Host "Prochaines etapes:" -ForegroundColor Cyan
-Write-Host "   1. Le backend demarre sur http://localhost:3000" -ForegroundColor White
-Write-Host "   2. Le frontend demarre sur http://localhost:5173" -ForegroundColor White
-Write-Host "   3. Ouvrez http://localhost:5173 dans votre navigateur" -ForegroundColor White
+Write-Host "   1. Ouvrez http://localhost:5173 dans votre navigateur" -ForegroundColor White
+Write-Host "   2. Vos donnees sont stockees localement dans le navigateur" -ForegroundColor White
+Write-Host "   3. Le site est deploye automatiquement sur GitHub Pages" -ForegroundColor White
 Write-Host ""
 Write-Host "Commandes utiles:" -ForegroundColor Cyan
-Write-Host "   - Backend dev:  cd backend && npm run dev" -ForegroundColor White
-Write-Host "   - Frontend build:  cd frontend && npm run build" -ForegroundColor White
+Write-Host "   - Dev server:  cd frontend && npm run dev" -ForegroundColor White
+Write-Host "   - Build prod:  cd frontend && npm run build" -ForegroundColor White
+Write-Host "   - Deploy:      git push origin main" -ForegroundColor White
 Write-Host ""
 Write-Host "Appuyez sur une touche pour continuer..." -ForegroundColor Yellow
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')

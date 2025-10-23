@@ -1,0 +1,17 @@
+{
+  "name": "raclette-list-frontend",
+  "version": "1.0.0",
+  "description": "Frontend pour liste de courses raclette",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["raclette", "liste", "courses"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

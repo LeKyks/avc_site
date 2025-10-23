@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧀 Raclette</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FFA726',
+            secondary: '#FFD54F',
+            background: '#FFF8E1',
+            warm: '#5D4037',
+            accent: '#FF7043'
+          },
+          fontFamily: {
+            title: ['Comfortaa', 'cursive'],
+            body: ['Nunito', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body class="bg-background font-body text-warm min-h-screen">
+  
+  <!-- Container principal -->
+  <main class="container mx-auto px-4 py-8 max-w-2xl">
+    
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="font-title text-4xl md:text-5xl font-bold text-primary mb-2">
+        🧀 Liste de Courses Raclette
+      </h1>
+      <p class="text-warm/70 text-lg">
+        Manger
+      </p>
+    </header>
+
+    <!-- Formulaire d'ajout -->
+    <section class="bg-white rounded-2xl shadow-lg p-6 mb-8" aria-label="Ajouter un article">
+      <form id="add-item-form" class="space-y-4">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="flex-1">
+            <label for="item-name" class="sr-only">Nom de l'article</label>
+            <input 
+              type="text" 
+              id="item-name" 
+              name="name"
+              placeholder="Nom de l'article"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 border-primary/20 focus:border-primary focus:outline-none transition-colors duration-200 font-body"
+              aria-label="Nom de l'article"
+            >
+          </div>
+          <div class="sm:w-32">
+            <label for="item-quantity" class="sr-only">Quantité</label>
+            <input 
+              type="text" 
+              id="item-quantity" 
+              name="quantity"
+              placeholder="Quantité"
+              class="w-full px-4 py-3 rounded-lg border-2 border-secondary/20 focus:border-secondary focus:outline-none transition-colors duration-200 font-body"
+              aria-label="Quantité"
+            >
+          </div>
+        </div>
+        
+        <button 
+          type="submit"
+          class="w-full bg-primary hover:bg-accent text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg"
+        >
+          ➕ Ajouter à la liste
+        </button>
+      </form>
+
+      <!-- Loading state -->
+      <div id="loading" class="hidden mt-4 text-center text-primary">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-primary border-t-transparent"></div>
+        <p class="mt-2 text-sm">Chargement...</p>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-message" class="hidden mt-4 bg-accent/10 border-2 border-accent text-warm px-4 py-3 rounded-lg" role="alert">
+        <p class="font-semibold">Erreur</p>
+        <p id="error-text" class="text-sm"></p>
+      </div>
+    </section>
+
+    <!-- Liste des items -->
+    <section class="bg-white rounded-2xl shadow-lg p-6" aria-label="Liste des courses">
+      <h2 class="font-title text-2xl font-semibold text-warm mb-4 flex items-center gap-2">
+        📝 Articles
+        <span id="items-count" class="text-sm font-body font-normal text-warm/60">(0)</span>
+      </h2>
+      
+      <ul id="items-list" role="list" class="space-y-3">
+        <!-- Items will be injected here by JavaScript -->
+      </ul>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="text-center py-8 text-warm/50">
+        <p class="text-lg">🛒 Votre liste est vide</p>
+        <p class="text-sm mt-2">Ajoutez des articles ci-dessus</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-warm/50 text-sm">
+      <p>copyright édition didier 2006</p>
+    </footer>
+  </main>
+
+  <script type="module" src="./scripts/app.js"></script>
+</body>
+</html>

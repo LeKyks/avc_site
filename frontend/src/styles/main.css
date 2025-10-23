@@ -1,0 +1,104 @@
+/* Styles personnalisés supplémentaires */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF8E1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFA726;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF7043;
+}
+
+/* Animations personnalisées */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.item-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+.item-exit {
+  animation: fadeOut 0.2s ease-in;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Focus visible pour accessibilité */
+:focus-visible {
+  outline: 3px solid #FFA726;
+  outline-offset: 2px;
+}
+
+/* Amélioration des transitions */
+button,
+input,
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Styles pour les états disabled */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Print styles */
+@media print {
+  header p,
+  footer,
+  form,
+  button {
+    display: none;
+  }
+  
+  body {
+    background: white;
+  }
+}

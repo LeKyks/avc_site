@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Fromage à raclette",
+      "quantity": "1kg"
+    },
+    {
+      "id": 3,
+      "name": "Charcuterie",
+      "quantity": "200g"
+    },
+    {
+      "id": 7,
+      "name": "Vin blanc",
+      "quantity": "1 bouteille"
+    }
+  ],
+  "nextId": 8
+}

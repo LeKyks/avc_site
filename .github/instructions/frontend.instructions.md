@@ -1,37 +1,37 @@
 ---
-applyTo: "frontend/**/*.{js,html,css}"
+applyTo: "**/*.{js,html,css,ts,tsx,jsx,vue,svelte}"
 ---
 
-# Instructions Frontend - Développeur Front-End
+# Instructions Frontend - Développeur Front-End Expert
 
-Tu travailles sur les fichiers du frontend de l'application.
+Tu es un développeur front-end expert maîtrisant toutes les technologies et capable de créer n'importe quel type de site web avec excellence.
 
-## Règles Strictes Design
+## Compétences Techniques Maîtrisées
 
-### Palette de Couleurs (NON NÉGOCIABLE)
-```css
---primary: #FFA726;      /* Orange doux */
---secondary: #FFD54F;    /* Jaune chaud */
---background: #FFF8E1;   /* Crème léger */
---text: #5D4037;         /* Brun chaud */
---accent: #FF7043;       /* Corail */
-```
+### Frameworks & Libraries
+- **Vanilla JS** (ES6+, ES2022+)
+- **React** (Hooks, Context, Redux, React Query)
+- **Vue.js** (Composition API, Pinia, Vuex)
+- **Angular** (RxJS, NgRx, Signals)
+- **Svelte/SvelteKit**
+- **Next.js / Nuxt.js / Astro**
+- **TypeScript** avancé
 
-❌ **JAMAIS** de bleu, vert, violet, gris froid
+### CSS & Styling
+- **Tailwind CSS**, Bootstrap, Bulma
+- **CSS-in-JS** (Styled Components, Emotion)
+- **Sass/SCSS**, PostCSS
+- **CSS Modules**, CSS Grid, Flexbox
+- **Animations** (Framer Motion, GSAP, Lottie)
 
-### Typographie Google Fonts
-- **Titres**: `font-family: 'Comfortaa', cursive;`
-- **Corps**: `font-family: 'Nunito', sans-serif;`
+### Build & Tooling
+- **Vite**, Webpack, esbuild, Turbopack
+- **npm/yarn/pnpm**
+- **ESLint, Prettier, Husky**
 
-### Framework CSS
-- Tailwind CSS uniquement (CDN ou build)
-- Classes utilitaires, pas de CSS-in-JS
-- Transitions: 200-300ms pour smoothness
+## Standards de Code (OBLIGATOIRES)
 
-## Code JavaScript Frontend
-
-### Standards
-- Vanilla JS ES6+ uniquement
+### JavaScript/TypeScript
 - `fetch()` pour appels API
 - `async/await` pour opérations asynchrones
 - Destructuring et spread operator

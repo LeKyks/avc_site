@@ -1,14 +1,14 @@
 {
-  "name": "raclette-list-frontend",
+  "name": "lorette-birthday",
   "version": "1.0.0",
-  "description": "Frontend pour liste de courses raclette",
+  "description": "Site anniversaire Lorette",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
-  "keywords": ["raclette", "liste", "courses"],
+  "keywords": ["birthday", "lorette"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
